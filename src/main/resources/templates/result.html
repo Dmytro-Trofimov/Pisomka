@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	font-family: Arial, sans-serif; /* Додано шрифт */
+}
+
+.container {
+	width: 50%;
+}
+
+.content {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin: 5px 0 20px 0;
+	border: none;
+	border-radius: 4px;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	color: #000;
+	outline: none;
+	resize: none;
+	font-size: 20px; /* Встановлено розмір шрифту */
+}
+
+.myButton {
+	font-family: CustomSansSerif, 'Lucida Grande', Arial, sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 17px;
+	color: #000;
+	text-decoration: none;
+	border: 2px solid #333;
+	border-radius: 16px;
+	text-transform: uppercase;
+	padding: 4px 12px;
+	margin: 0 0 15px;
+	background-color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	position: fixed;
+	top: 10%;
+	left: 90%;
+}
+</style>
+<title>Result</title>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			<span th:text="${page.title}"></span>
+		</h2>
+		<p>
+			<span th:text="${page.author}"></span>
+		</p>
+		<a th:href="@{/edit/{id}(id=${page.id})}">
+    		<button type="button" class="myButton">Edit</button>
+		</a>
+		<div class="content">
+			<p th:utext="${page.story}"></p>
+		</div>
+	</div>
+</body>
