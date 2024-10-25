@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+}
+
+form {
+	width: 50%;
+}
+
+.editable {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin: 2px 0; /* Зменшена відстань між полями */
+	border: none;
+	border-radius: 4px;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	color: #000;
+	outline: none;
+	resize: none;
+}
+
+.myButton {
+	font-family: CustomSansSerif, 'Lucida Grande', Arial, sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 17px;
+	color: #000;
+	text-decoration: none;
+	border: 2px solid #333;
+	border-radius: 16px;
+	text-transform: uppercase;
+	padding: 4px 12px;
+	margin: 0 0 15px;
+	background-color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	position: fixed;
+	top: 10%;
+	left: 90%;
+}
+
+.placeholder {
+	color: rgba(0, 0, 0, 0.5);
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+</style>
+<title>Editable Content</title>
+</head>
+<body>
+	<form th:action="@{/publish}" th:object="${page}" method="post">
+		<button type="submit" class="myButton">Publish</button>
+		<textarea class="editable" th:field="*{title}"
+			style="font-size: 40px;" placeholder="Title"></textarea>
+		<textarea class="editable" th:field="*{author}"
+			style="font-size: 30px;" placeholder="Your name"></textarea>
+		<div id="story" class="editable placeholder" contenteditable="true"
+			onfocus="removePlaceholder(this)" onblur="addPlaceholder(this)"
+			data-placeholder="Your story..." th:utext="${page.story}"></div>
+		<textarea id="storyContent" th:field="*{story}" style="display: none;"></textarea>
+		<textarea id="id" th:field="*{id}" style="display: none;"></textarea>
+	</form>
+	<script>
+		function removePlaceholder(el) {
+			if (el.textContent === el.getAttribute('data-placeholder')) {
+				el.textContent = '';
+				el.classList.remove('placeholder');
+			}
+		}
+		function addPlaceholder(el) {
+			if (el.textContent === '') {
+				el.textContent = el.getAttribute('data-placeholder');
+				el.classList.add('placeholder');
+			}
+		}
+		document
+				.getElementById('story')
+				.addEventListener(
+						'paste',
+						function(event) {
+							var items = event.clipboardData.items;
+							for (var i = 0; i < items.length; i++) {
+								if (items[i].type.indexOf('image') !== -1) {
+									var file = items[i].getAsFile();
+									var reader = new FileReader();
+									reader.onload = function(event) {
+										var imgTag = '<img src="'
+												+ event.target.result
+												+ '" style="max-width: 100%;">';
+										document.getElementById('story').innerHTML += imgTag;
+									};
+									reader.readAsDataURL(file);
+									event.preventDefault();
+								}
+							}
+						});
+		document.querySelector('form').addEventListener(
+				'submit',
+				function() {
+					document.getElementById('storyContent').value = document
+							.getElementById('story').innerHTML;
+				});
+	</script>
+</body>
+</html>

@@ -66,13 +66,10 @@ form {
 			style="font-size: 40px;" placeholder="Title"></textarea>
 		<textarea class="editable" th:field="*{author}"
 			style="font-size: 30px;" placeholder="Your name"></textarea>
-		<div id="story" class="editable placeholder" contenteditable="true" 
-     onfocus="removePlaceholder(this)" 
-     onblur="addPlaceholder(this)" 
-     data-placeholder="Your story..." 
-     th:utext="${page.story}">
-</div>
-<textarea id="storyContent" th:field="*{story}" style="display: none;"></textarea>
+		<div id="story" class="editable placeholder" contenteditable="true"
+			onfocus="removePlaceholder(this)" onblur="addPlaceholder(this)"
+			data-placeholder="Your story..." th:utext="${page.story}"></div>
+		<textarea id="storyContent" th:field="*{story}" style="display: none;"></textarea>
 
 	</form>
 	<script>

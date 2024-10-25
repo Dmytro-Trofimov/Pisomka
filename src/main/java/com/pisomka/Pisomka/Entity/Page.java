@@ -49,9 +49,7 @@ public class Page implements Serializable{
 	public String toString() {
 		return "Page [id=" + id + ", title=" + title + ", author=" + author + ", story=" + story + "]";
 	}
-	public Page(int id, String title, String author, String story) {
-		super();
-		this.id = id;
+	public Page(String title, String author, String story) {
 		this.title = title;
 		this.author = author;
 		this.story = story;

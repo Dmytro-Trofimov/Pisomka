@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pisomka.Pisomka.Entity.Page;
+import com.pisomka.Pisomka.Entity.PageDTO;
 import com.pisomka.Pisomka.Services.PageService;
 
 @Controller
@@ -17,17 +18,24 @@ public class MyController {
     @Autowired
     private PageService service;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("page", new Page());
+        model.addAttribute("page", new PageDTO());
         return "home";
     }
 
     @PostMapping("/publish")
-    public String submitForm(Page page) {
-        Page savedPage = service.save(page);
-        service.delete(savedPage.getId()-1);
-        return "redirect:/result/" + savedPage.getId();
+    public String submitForm(PageDTO pagedto) {
+    	if(pagedto.getId()==0) {
+    		Page savedPage = service.save(new Page(pagedto.getTitle(),pagedto.getAuthor(), pagedto.getStory()));
+    		return "redirect:/result/" + savedPage.getId();
+    	}
+    	
+    	Page page = service.findById(pagedto.getId());
+    	page.setAuthor(pagedto.getAuthor());
+    	page.setAuthor(pagedto.getTitle());
+    	page.setAuthor(pagedto.getStory());
+    	return "redirect:/result/" + page.getId();
     }
 
     @GetMapping("/result/{id}")
@@ -39,7 +47,7 @@ public class MyController {
     @RequestMapping("/edit/{id}")
     public String editPage(@PathVariable int id,Model model) {
         model.addAttribute("page", service.findById(id));
-        return "home";
+        return "edit";
     }
 }
  

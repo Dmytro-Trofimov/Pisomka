@@ -2,5 +2,6 @@ com\pisomka\Pisomka\Configuration\RedisConfiguration.class
 com\pisomka\Pisomka\Entity\Page.class
 com\pisomka\Pisomka\PisomkaApplication.class
 com\pisomka\Pisomka\Services\PageService.class
+com\pisomka\Pisomka\Entity\PageDTO.class
 com\pisomka\Pisomka\Repository\PageRepository.class
 com\pisomka\Pisomka\MyController.class
