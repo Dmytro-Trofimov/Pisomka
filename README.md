@@ -12,7 +12,7 @@ Technologies Used
 ### Downloading and Running the Project
 Clone the Repository:
 ```
-git clone https://github.com/yourusername/pisomka.git
+git clone https://github.com/Dmytro-Trofimov/Pisomka.git
 ```
 ```
 cd pisomka
