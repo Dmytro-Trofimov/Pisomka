@@ -28,3 +28,4 @@ Access the Application: Open your browser and navigate to http://localhost:8080 
 
 
 You can also watch a video of how it works https://github.com/Dmytro-Trofimov/Pisomka/blob/main/2024-11-11%2010-34-50.mp4
+photo https://github.com/Dmytro-Trofimov/Pisomka/blob/main/photo_5237809258987381083_w.jpg
